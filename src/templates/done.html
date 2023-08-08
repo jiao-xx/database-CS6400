@@ -1,0 +1,27 @@
+{% set pageTitle = 'Submission complete!' %}
+{% set show_report_breadcrumb = False %}
+
+{% extends "_base.html" %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% block content %}
+
+<div class="progress">
+  <div class="progress-bar progress-completed"> Household info </div>
+  <div class="progress-bar progress-completed"> Appliances </div>
+  <div class="progress-bar progress-completed"> Power generation </div>
+  <div class="progress-bar progress-active"> Done </div>
+</div>
+
+<h2>{{ pageTitle }}</h2>
+<p> Thank you for providing your information to Alternakraft!</p>
+
+
+<div class="container ">
+
+  <div class="appForm-small pull-right">
+  <a href="{{ url_for('main')}}" class="btn btn-link"> Return to the main menu</a>
+</div>
+</div>
+
+{% endblock %}

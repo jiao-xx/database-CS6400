@@ -1,0 +1,70 @@
+{% set pageTitle = 'Top 25 Popular Manufacturers' %}
+{% set show_report_breadcrumb = True %}
+
+{% extends "_base.html" %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% block pageTitleContent %}
+  {% if isDrillDown %}
+    <li><a href="{{ url_for('report_top_manufacturers') }}">{{pageTitle}}</a></li>
+  {% else %}
+    <li>{{pageTitle}}</li>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>{{ pageTitle }}</h1>
+
+{% if isDrillDown %}
+<h4>Drilldown for '{{ subPageTitle }}'</h4>
+{% endif %}
+
+<div class="container customReportTable70">
+
+  {% if not isDrillDown %}
+  <table class="table table-striped justify-content-start">
+    <thead>
+      <tr class="justify-content-center">
+        <th>Manufacturer Name</th>
+        <th>Total Appliances</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in results %}
+      <tr class="align-left">
+        <td>
+          <a href="{{ url_for('report_top_manufacturers_drilldown', manufacturerName=row[0]) }}"
+            class="btn btn-lg btn-link"> {{row[0]}}</a>
+        </td>
+        <td> {{ row[1] }} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% if isDrillDown %}
+<table class="table table-striped justify-content-start">
+  <thead>
+    <tr class="justify-content-center">
+      <th>Appliance Type</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in results %}
+    <tr class="align-left">
+      <td>
+        {{ row[0] }}
+      </td>
+      <td> {{ row[1] }} </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+
+{% endblock %}

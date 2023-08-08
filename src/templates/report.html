@@ -1,0 +1,41 @@
+{% extends "_base.html" %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h1>Reports</h1>
+
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td>
+            <a href="{{ url_for('report_top_manufacturers') }}" class="btn btn-lg btn-link">Top 25 popular manufacturers</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="{{ url_for('report_manufacturer_model_search') }}" class="btn btn-lg btn-link">Manufacturer/model search</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="{{ url_for('report_heating_cooling_methods') }}" class="btn btn-lg btn-link">Heating/cooling method details</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="{{ url_for('report_waterheater_statistics') }}" class="btn btn-lg btn-link">Water heater statistics by state</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="{{ url_for('report_otg_household_dashboard') }}" class="btn btn-lg btn-link">Off-the-grid household dashboard</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="{{ url_for('report_household_avg_radius') }}" class="btn btn-lg btn-link">Household averages by radius</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+{% endblock %}

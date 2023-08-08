@@ -1,0 +1,45 @@
+{% set pageTitle = 'Manufacturer/model search' %}
+{% set show_report_breadcrumb = True %}
+
+{% extends "_base.html" %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% block content %}
+<h1>{{ pageTitle }}</h1>
+
+<div class="container appForm">
+    {% include '_flash-container.html' %}
+    <form action="/report/manufacturer-model-search" method="post" class="form-inline">
+        {{ form.csrf_token }}
+        <div class="form-group mb-2">
+            <label for="searchTerm">Search Term</label>
+            {{ form.searchTerm(class_='form-control') }}
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+    <hr>
+
+    <table class="table table-striped justify-content-start">
+        <thead>
+            <tr class="justify-content-center">
+                <th>Manufacturer Name</th>
+                <th>Model Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr class="align-left">
+
+                {% set searchString = form.searchTerm.data.strip() %}
+                {% set manClass = 'search-match' if searchString in row[0] else '' %}
+                {% set modClass = 'search-match' if searchString in row[1] else '' %}
+                <td class="{{manClass}}"> {{ row[0] }} </td>
+                <td class="{{modClass}}"> {{ row[1] }} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

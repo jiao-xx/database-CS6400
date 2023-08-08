@@ -1,0 +1,137 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.appForm {
+  width: 60%;
+  padding-top: 25px;
+}
+
+.appForm-small {
+  width: 40%;
+  padding-top: 25px;
+}
+
+.appForm-large {
+  padding-top: 25px;
+}
+
+.panel-card {
+  /* width: 100%; */
+}
+
+.panel-card-list {
+  border: 0;
+  border-bottom: 1px;
+  padding: 2px;
+}
+
+.panel-header {
+  font-size: 1.25em;
+}
+
+.panel-data {
+  font-size: 2.25em;
+}
+
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background-color: transparent;
+  margin-left: 0!important;
+  margin-right: 0!important;
+}
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
+}
+ul.breadcrumb li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+ul.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}
+
+.headerSpace {
+  padding-bottom: 25px;
+}
+
+.spacer10 {
+  padding-top: 10px;
+}
+.customSelect {
+  width: 100%;
+}
+
+.customReportTable70 {
+  width: 70%;
+  padding-top: 25px;
+}
+
+.customLeftAlign {
+  margin-left: 0!important;
+  margin-right: 0!important;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.progress-active {
+  width: 25%;
+}
+
+.progress-completed {
+  width: 25%;
+  background-color: darkgray;
+  color:#fff
+}
+
+.progress-not-active {
+  width: 25%;
+  background-color: #f5f5f5;
+  color:#000
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.search-match {
+  background-color: lightgreen;
+}
+
+.font1 {
+  color:#000;
+}

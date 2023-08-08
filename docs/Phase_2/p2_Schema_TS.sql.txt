@@ -1,0 +1,98 @@
+CREATE TABLE Household (
+  Email VARCHAR(100) NOT NULL,
+  SquareFootage INT NOT NULL,
+  HouseholdType VARCHAR(50) NOT NULL,
+  HeatingSetting INT NULL,
+  CoolingSetting INT NULL,
+  PostalCode VARCHAR(5) NOT NULL,
+  PRIMARY KEY (Email),
+  FOREIGN KEY (PostalCode) 
+	REFERENCES `PostalCode`(PostalCode));
+
+CREATE TABLE PostalCode (
+  PostalCode VARCHAR(5) NOT NULL,
+  City VARCHAR(50) NOT NULL,
+  State VARCHAR(50) NOT NULL,
+  Latitude decimal(8,6) NOT NULL,
+  Longitude decimal(8,6) NOT NULL,
+  PRIMARY KEY (PostalCode));
+
+CREATE TABLE PublicUtility (
+  Email VARCHAR(100) NOT NULL
+  PublicUtility VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Email, PublicUtility),
+  FOREIGN KEY (Email) 
+	REFERENCES `Household`(Email));
+
+CREATE TABLE Manufacturer (
+  ManufacturerName VARCHAR(50) NOT NULL,
+  PRIMARY KEY (ManufacturerName));
+
+CREATE TABLE Appliance (
+  Email VARCHAR(100) NOT NULL,
+  OrderNumber INT UNSIGNED NOT NULL,
+  ManufacturerName VARCHAR(50) NOT NULL,
+  ModelName VARCHAR(50) NULL,
+  BtuRating INT UNSIGNED NOT NULL,
+  PRIMARY KEY (Email, OrderNumber),
+  FOREIGN KEY (Email) 
+	REFERENCES `Household`(EMail),
+  FOREIGN KEY (ManufacturerName) 
+	REFERENCES `Manufacturer`(ManufacturerName));
+
+CREATE TABLE WaterHeater (
+  Email VARCHAR(100) NOT NULL,
+  OrderNumber INT UNSIGNED NOT NULL,
+  TankSize DECIMAL(20,10) NOT NULL,
+  CurrentTempSetting INT,
+  EnergySource VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Email, OrderNumber),
+  FOREIGN KEY (Email, OrderNumber) 
+	 REFERENCES `Appliance`(Email, OrderNumber));
+
+CREATE TABLE AirHandler (
+  Email VARCHAR(100) NOT NULL,
+  OrderNumber INT UNSIGNED NOT NULL,
+  RPM INT UNSIGNED NOT NULL,
+  PRIMARY KEY (Email, OrderNumber),
+  FOREIGN KEY (Email, OrderNumber) 
+	REFERENCES `Appliance`(Email, OrderNumber));
+
+CREATE TABLE AirConditioner (
+  Email VARCHAR(100) NOT NULL,
+  OrderNumber INT UNSIGNED NOT NULL,
+  EnergySource VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Email, OrderNumber),
+  FOREIGN KEY (Email, OrderNumber) 
+	REFERENCES `AirHandler`(Email, OrderNumber));
+);
+
+CREATE TABLE Heater (
+  Email VARCHAR(100) NOT NULL,
+  OrderNumber INT UNSIGNED NOT NULL,
+  EER DECIMAL(20,10) NOT NULL,
+  PRIMARY KEY (Email, OrderNumber),
+  FOREIGN KEY (Email, OrderNumber) 
+	REFERENCES `AirHandler`(Email, OrderNumber));
+);
+
+CREATE TABLE HeatPump (
+  Email VARCHAR(100) NOT NULL,
+  OrderNumber INT UNSIGNED NOT NULL,
+  HSPF DECIMAL(20,10) NOT NULL,
+  SEER DECIMAL(20,10) NOT NULL,
+  PRIMARY KEY (Email, OrderNumber),
+  FOREIGN KEY (Email, OrderNumber) 
+	REFERENCES `AirHandler`(Email, OrderNumber));
+);
+
+CREATE TABLE PowerGenerator (
+  Email VARCHAR(100) NOT NULL,
+  OrderNumber INT UNSIGNED NOT NULL,
+  BatteryStorageCapacity INT UNSIGNED,
+  AvgMonthlyKwHours INT UNSIGNED NOT NULL,
+  GenerationType VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Email, OrderNumber),
+  FOREIGN KEY (Email, OrderNumber) 
+	REFERENCES `Household`(Email, OrderNumber)
+);

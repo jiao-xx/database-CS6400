@@ -1,0 +1,88 @@
+{% set pageTitle = 'Water Heater Statistics by State' %}
+{% set show_report_breadcrumb = True %}
+
+{% extends "_base.html" %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% block pageTitleContent %}
+  {% if isDrillDown %}
+    <li><a href="{{ url_for('report_waterheater_statistics') }}">{{pageTitle}}</a></li>
+  {% else %}
+    <li>{{pageTitle}}</li>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>{{ pageTitle }}</h1>
+
+{% if isDrillDown %}
+<h4>Drilldown for '{{ subPageTitle }}'</h4>
+{% endif %}
+
+<div class="container customReportTable70">
+
+  {% if not isDrillDown %}
+  <table class="table table-striped justify-content-start">
+    <thead>
+      <tr class="justify-content-center">
+        <th>State</th>
+        <th>Avg Tank Size</th>
+        <th>Avg BTUs</th>
+        <th>Avg Temperature Setting</th>
+        <th>Temperature Setting Provided</th>
+        <th>Temperature Setting NOT Provided</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in results %}
+      <tr class="align-left">
+        <td>
+          <a href="{{ url_for('report_waterheater_statistics_drilldown', state=row[0]) }}"
+            class="btn btn-lg btn-link"> {{row[0]}}</a>
+        </td>
+        <td> {{ row[1] }} </td>
+        <td> {{ row[2] }} </td>
+        <td> {{ row[3] }} </td>
+        <td> {{ row[4] }} </td>
+        <td> {{ row[5] }} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% if isDrillDown %}
+<table class="table table-striped justify-content-start">
+  <thead>
+    <tr class="justify-content-center">
+      <th>Engergy Source</th>
+      <th>Min Tank Size</th>
+      <th>Avg Tank Size</th>
+      <th>Max Tank Size</th>
+      <th>Min Temp Setting</th>
+      <th>Avg Temp Setting</th>
+      <th>Max Temp Setting</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in results %}
+    <tr class="align-left">
+      <td>
+        {{ row[0] }}
+      </td>
+      <td> {{ row[1] }} </td>
+      <td> {{ row[2] }} </td>
+      <td> {{ row[3] }} </td>
+      <td> {{ row[4] }} </td>
+      <td> {{ row[5] }} </td>
+      <td> {{ row[6] }} </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+
+{% endblock %}

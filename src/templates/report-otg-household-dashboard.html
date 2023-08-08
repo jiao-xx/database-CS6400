@@ -1,0 +1,159 @@
+{% set pageTitle = 'Off-the-Grid Household Dashboard' %}
+{% set show_report_breadcrumb = True %}
+
+{% extends "_base.html" %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% block content %}
+<h1>{{ pageTitle }}</h1>
+
+<div class="container appForm">
+    {% include '_flash-container.html' %}
+
+    {% if result1 %}
+    <h4 class="align-left">1. State with Most Off-the-Grid Households</h4>
+    <!-- <p>The state with the most off-the-grid households is {{ result1[0][0] }} with {{ result1[0][1] }} households.</p> -->
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    <table class="table table-striped justify-content-start">
+        <thead>
+            <tr class="justify-content-center">
+                <th>State</th>
+                <th>Off-the-Grid Households</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="align-left">
+                <td>{{ result1[0][0] }}</td>
+                <td>{{ result1[0][1] }}%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if result2 %}
+    <hr>
+    <h4 class="align-left">2. Average Battery Storage Capacity for Off-the-Grid Households</h4>
+    <!-- <p>The average battery storage capacity for off-the-grid households is {{ result2[0][0] }}.</p> -->
+    <div class="row">
+        <div class="col-sm-12">
+            {% with panelHeader='Avg Storage Capacity', panelData=result2[0][0] %}
+            {% include '_data-card.html' %}
+            {% endwith %}
+        </div>
+    </div>
+
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    {% if result3 %}
+    <hr>
+    <h4 class="align-left">3. Power Generation Types for Off-the-Grid Households</h4>
+
+    <table class="table table-striped justify-content-start">
+        <thead>
+            <tr class="justify-content-center">
+                <th>Power Generation Type</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in result3 %}
+            <tr class="align-left">
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    {% if result4 %}
+    <hr>
+    <h4 class="align-left">4. Household Types for Off-the-Grid Households</h4>
+
+    <table class="table table-striped justify-content-start">
+        <thead>
+            <tr class="justify-content-center">
+                <th>Household Type</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in result4 %}
+            <tr class="align-left">
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    {% if result5 %}
+    <hr>
+    <h4 class="align-left">5. Average Water Heater Tank Sizes</h4>
+
+    <table class="table table-striped justify-content-start">
+        <thead>
+            <tr class="justify-content-center">
+                <th>Household Type</th>
+                <th>Average Tank Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="align-left">
+                <td>Off-the-Grid Households</td>
+                <td>{{ result5[0][0] }}</td>
+            </tr>
+            <tr class="align-left">
+                <td>On-the-Grid Households</td>
+                <td>{{ result5[0][1] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    {% if result6 %}
+    <hr>
+    <h4 class="align-left">6. BTU Ratings by Appliance Type for Off-the-Grid Households</h4>
+
+    <table class="table table-striped justify-content-start">
+        <thead>
+            <tr class="justify-content-center">
+                <th>Appliance Type</th>
+                <th>Min BTU</th>
+                <th>Avg BTU</th>
+                <th>Max BTU</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in result6 %}
+            <tr class="align-left">
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    {% endblock %}
+
+</div>

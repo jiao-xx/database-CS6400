@@ -1,0 +1,87 @@
+{% set pageTitle = 'Heating/cooling method details' %}
+{% set show_report_breadcrumb = True %}
+
+{% extends "_base.html" %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% block content %}
+    <h1>{{ pageTitle }}</h1>
+   
+    <h2>Air Conditioners</h2>
+    <table class="table table-striped justify-content-start">
+      <thead>
+        <tr class="justify-content-center">
+          <th>Type</th>
+          <th>Count</th>
+          <th>Average BTUs</th>
+          <th>Average RPM</th>
+          <th>Average EER</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in result1 %}
+        <tr class="align-left"></tr>
+          <td> {{ row[0] }} </td>
+          <td> {{ row[1] }} </td>
+          <td> {{ row[2] }} </td>
+          <td> {{ row[3] }} </td>
+          <td> {{ row[4] }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>Heaters</h2>
+    <table class="table table-striped justify-content-start">
+      <thead>
+        <tr class="justify-content-center">
+          <th>Household Type</th>
+          <th>Count</th>
+          <th>Average BTUs</th>
+          <th>Average RPM</th>
+          <th>Common Energy Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in result2 %}
+        <tr class="align-left">
+          <td> {{ row[0] }} </td>
+          <td> {{ row[1] }} </td>
+          <td> {{ row[2] }} </td>
+          <td> {{ row[3] }} </td>
+          <td> {{ row[4] }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    <h2>Heat Pumps</h2>
+    <table class="table table-striped justify-content-start">
+      <thead>
+        <tr class="justify-content-center">
+          <th>Household Type</th>
+          <th>Count</th>
+          <th>Average BTUs</th>
+          <th>Average RPM</th>
+          <th>Average SEER</th>
+          <th>Average HSPF</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in result3 %}
+        <tr class="align-left">
+          <td> {{ row[0] }} </td>
+          <td> {{ row[1] }} </td>
+          <td> {{ row[2] }} </td>
+          <td> {{ row[3] }} </td>
+          <td> {{ row[4] }} </td>
+          <td> {{ row[5] }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}
+
+
+

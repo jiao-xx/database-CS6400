@@ -1,0 +1,187 @@
+{% extends "_base.html" %}
+{% set pageTitle = 'Appliances' %}
+
+{% block content %}
+
+<div class="progress">
+  <div class="progress-bar progress-completed"> Household info </div>
+  <div class="progress-bar progress-active"> Appliances </div>
+  <div class="progress-bar progress-not-active"> Power generation </div>
+  <div class="progress-bar progress-not-active"> Done </div>
+</div>
+
+<h2>{{ pageTitle }}</h2>
+
+<h5 class="headerSpace"> Please provide the details for the appliance:</h5>
+
+<div class="container appForm">
+  {% include '_appliance-alert-container.html' %}
+
+  <div id="airHandlerDiv">
+
+    <form action="/appliance" method="post">
+      {{ airhandlerForm.csrf_token }}
+
+      <!-- applianceType -->
+      <div class="form-group row">
+        <label for="applianceType" class="col-sm-4 col-form-label">Appliance type</label>
+        <div class="col-sm-4">
+          {{ airhandlerForm.ahApplianceType(class_='form-control') }}
+        </div>
+
+        <label for="btus" class="col-sm-1 col-form-label">BTUs</label>
+        <div class="col-sm-3">
+          {{ airhandlerForm.ahBtus(class_='form-control') }}
+        </div>
+      </div>
+
+      <!-- Manufacturer -->
+      <div class="form-group row">
+
+        <label for="manufacturer" class="col-sm-4 col-form-label">Manufacturer</label>
+        <div class="col-sm-6">
+          {{ airhandlerForm.ahManufacturer(class_='form-control') }}
+        </div>
+      </div>
+
+      <!-- modelName -->
+      <div class="form-group row">
+        <label for="modelName" class="col-sm-4 col-form-label">Model name</label>
+        <div class="col-sm-8">
+          {{ airhandlerForm.ahModelName(class_='form-control') }}
+        </div>
+      </div>
+
+      <!-- fanRPMs -->
+      <div class="form-group row">
+        <label for="fanRpms" class="col-sm-4 col-form-label">Fan RPMs</label>
+        <div class="col-sm-4">
+          {{ airhandlerForm.fanRpms(class_='form-control') }}
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group row">
+        <div class="col-sm-4">
+          {{ airhandlerForm.heatingCoolingTypes(class_='form-control') }}
+
+        </div>
+        <div class="col-sm-8">
+
+          <!-- EER -->
+          <div id="eer" class="col-sm-12 spacer10" hidden>
+            <label for="eer" class="col-sm-6 col-form-label align-left">Energy efficiency ratio:</label>
+            {{ airhandlerForm.eer(class_='form-control') }}
+          </div>
+
+          <!-- heaterEnergySource -->
+          <div id="heaterEnergySource" class="col-sm-12 spacer10" hidden>
+            <div class="col-sm-6 align-left">
+              <label for="heaterEnergySource" class="col-form-label ">Energy source:</label>
+            </div>
+            <div class="col-sm-6">
+              {{ airhandlerForm.heaterEnergySource(class_='form-control') }}
+            </div>
+          </div>
+
+          <!-- SEER -->
+          <div id="seer" class="col-sm-12 spacer10" hidden>
+            <label for="seer" class="col-sm-12 col-form-label align-left">Seasonal energy efficiency rating
+              (SEER):</label>
+            {{ airhandlerForm.seer(class_='form-control') }}
+          </div>
+
+          <!-- HSPF -->
+          <div id="hspf" class="col-sm-12 spacer10" hidden>
+            <label for="hspf" class="col-sm-12 col-form-label align-left">Heating seasonal performance factor
+              (HSPF):</label>
+
+            {{ airhandlerForm.hspf(class_='form-control') }}
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">Add</button>
+    </form>
+  </div>
+
+  <div id="waterHeaterDiv">
+
+    <form action="/appliance" method="post">
+      {{ waterheaterForm.csrf_token }}
+
+      <!-- applianceType -->
+      <div class="form-group row">
+        <label for="applianceType" class="col-sm-4 col-form-label">Appliance type</label>
+        <div class="col-sm-4">
+          {{ waterheaterForm.whApplianceType(class_='form-control') }}
+        </div>
+
+        <!-- <label for="btus" class="col-sm-1 col-form-label">BTUs</label>
+        <div class="col-sm-3">
+          {{ waterheaterForm.whBtus(class_='form-control') }}
+        </div> -->
+      </div>
+
+      <!-- Manufacturer -->
+      <div class="form-group row">
+        <label for="manufacturer" class="col-sm-4 col-form-label">Manufacturer</label>
+        <div class="col-sm-6">
+          {{ waterheaterForm.whManufacturer(class_='form-control') }}
+        </div>
+      </div>
+
+      <!-- modelName -->
+      <div class="form-group row">
+        <label for="modelName" class="col-sm-4 col-form-label">Model name</label>
+        <div class="col-sm-8">
+          {{ waterheaterForm.whModelName(class_='form-control') }}
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="waterHeaterEnergySource" class="col-form-label align-left">Energy source:</label>
+        </div>
+        <div class="col-sm-4 align-left">
+          {{ waterheaterForm.waterHeaterEnergySource(class_='form-control') }}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="tankSize" class="col-form-label align-left">Tank size (gallons):</label>
+        </div>
+        <div class="col-sm-4 align-left">
+          {{ waterheaterForm.tankSize(class_='form-control') }}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="btuRating" class="col-form-label align-left">BTU rating:</label>
+        </div>
+        <div class="col-sm-4 align-left">
+          {{ waterheaterForm.whBtus(class_='form-control') }}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="currentTempSetting" class="col-form-label align-left">Temperature:</label>
+        </div>
+        <div class="col-sm-4 align-left">
+          {{ waterheaterForm.currentTempSetting(class_='form-control') }}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Add</button>
+    </form>
+  </div>
+</div>
+
+
+
+{% endblock %}

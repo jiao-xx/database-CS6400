@@ -1,0 +1,99 @@
+{% extends "_base.html" %}
+{% set pageTitle = 'Enter household info' %}
+{% block title %} {{ pageTitle }} {% endblock %}
+{% block content %}
+
+<div class="progress">
+  <div class="progress-bar progress-active"> Household info </div>
+  <div class="progress-bar progress-not-active"> Appliances </div>
+  <div class="progress-bar progress-not-active"> Power generation </div>
+  <div class="progress-bar progress-not-active"> Done </div>
+</div>
+
+<h1></h1>
+<h2>{{ pageTitle }}</h2>
+<div class="container appForm">
+  {% include '_alert-container.html' %}
+
+  <form action="/household" method="post">
+    {{ form.csrf_token }}
+
+    <!-- Email -->
+    <div class="form-group row">
+      <label for="email" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
+        {{ form.email(class_='form-control') }}
+      </div>
+    </div>
+
+    <!-- Postal Code -->
+    <div class="form-group row">
+      <label for="postalCode" class="col-sm-3 col-form-label">PostalCode</label>
+      <div class="col-sm-9">
+        <!-- <input type="text" class="form-control" id="postalCode" placeholder="Please enter your 5 digit postal code"> -->
+        {{ form.postalCode(class_='form-control') }}
+      </div>
+    </div>
+
+    <hr>
+    <h5 class="headerSpace"> Please enter the following details for your household:</h5>
+
+    <!-- Home Type -->
+    <div class="form-group row">
+      <label for="homeType" class="col-sm-6 col-form-label">Home type</label>
+      <div class="col-sm-6">
+        {{ form.householdType(class_='form-control') }}
+      </div>
+    </div>
+
+    <!-- Square Footage -->
+    <div class="form-group row">
+      <label for="squareFootage" class="col-sm-6 col-form-label">Square Footage</label>
+      <div class="col-sm-6">
+        {{ form.squareFootage(class_='form-control') }}
+      </div>
+    </div>
+
+    <!-- heatingSetting -->
+    <div class="form-group row">
+      <label for="heatingSetting" class="col-sm-6 col-form-label">Thermostat setting for heating</label>
+      <div class="col-sm-3">
+        {{ form.heatingSetting(class_='form-control') }}
+      </div>
+
+      <div class="col-sm-3 float-left align-left">
+        {{ form.checkNoHeat() }}
+        <label for="checkNoHeat" class="col-form-label">No heat</label>
+      </div>
+
+    </div>
+
+    <!-- coolingSetting -->
+    <div class="form-group row">
+      <label for="coolingSetting" class="col-sm-6 col-form-label">Thermostat setting for cooling</label>
+      <div class="col-sm-3">
+        {{ form.coolingSetting(class_='form-control') }}
+      </div>
+
+      <div class="col-sm-3 float-left align-left">
+        {{ form.checkNoCooling() }}
+        <label for="checkNoCooling" class="col-form-label">No cooling</label>
+      </div>
+    </div>
+
+    <!-- -->
+    <hr>
+    <h5> Public utilities: (if none, leave unchecked)</h5>
+
+    <!-- Public utilities -->
+
+    {{ form.publicUtilities(class_='form-control') }}
+    <p> 
+      <i>Hint: multiple options can be selected. Try using the <b>Shift</b>, <b>Control</b>, or <b>Command ⌘ (Mac Only)</b> keys. </i>
+      <i>You can clear selected items with the <b>Control</b>, or <b>Command ⌘ </b> keys. </i>
+    </p>
+
+    <button type="submit" class="btn btn-primary mt-3">Next</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% set pageTitle = 'Appliances' %}
+{% set show_report_breadcrumb = False %}
+
+{% extends "_base.html" %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% block content %}
+
+<div class="progress">
+  <div class="progress-bar progress-completed"> Household info </div>
+  <div class="progress-bar progress-active"> Appliances </div>
+  <div class="progress-bar progress-not-active"> Power generation </div>
+  <div class="progress-bar progress-not-active"> Done </div>
+</div>
+
+<h2>{{ pageTitle }}</h2>
+<p> You have added the following appliances to your household:</p>
+<div class="container customReportTable70">
+  {% include '_flash-container.html' %}
+
+  <table class="table table-striped justify-content-start">
+    <thead>
+      <tr class="justify-content-center">
+        <th>Appliance #</th>
+        <th>Type</th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in results %}
+      <tr class="align-left">
+        <td> {{ row[4] }} </td>
+        <td> {{ row[1] }} </td>
+        <td> {{ row[2] }} </td>
+        <td> {{ row[3] }} </td>
+        <td>
+          <form action="{{ url_for('appliance_delete', id=row[0]) }}" method="post">
+            <button type="submit" class="btn btn-info btn btn-link"> delete</button>
+          </form>
+        </td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="form-group row">
+    <div class="col-sm-4 pull-right">
+      <a href="{{ url_for('appliance')}}" class="btn btn-link pull-right"> + Add another appliance</a>
+      <a href="{{ url_for('power') }}" class="btn btn-primary pull-right" role="button" aria-pressed="true">Next</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

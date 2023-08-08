@@ -1,0 +1,75 @@
+{% extends "_base.html" %}
+{% set pageTitle = 'Add power generation' %}
+{% block title %} {{ pageTitle }} {% endblock %}
+
+{% set disableSubmit = 'disabled' if can_skip==False else '' %}
+{% block content %}
+
+<div class="progress">
+  <div class="progress-bar progress-completed"> Household info </div>
+  <div class="progress-bar progress-completed"> Appliances </div>
+  <div class="progress-bar progress-active"> Power generation </div>
+  <div class="progress-bar progress-not-active"> Done </div>
+</div>
+
+<h2>{{ pageTitle }}</h2>
+
+<h5 class="headerSpace"> Please provide the power generation details.</h5>
+
+<div class="container appForm-small">
+  {% include '_alert-container.html' %}
+
+  <form action="/power" method="post">
+    {{ form.csrf_token }}
+
+    <div class="form-group row">
+
+      <div class="form-group row">
+
+        <div class="col-sm-12 form-group">
+          <label for="homeType" class="col-sm-4 col-form-label"> Type</label>
+          <div class="col-sm-8">
+            {{ form.powerGenerationType(class_='form-control') }}
+          </div>
+        </div>
+
+        <div class="col-sm-12 form-group">
+          <label for="email" class="col-sm-4 col-form-label">Monthly kWh</label>
+          <div class="col-sm-8">
+            {{ form.avgKwh(class_='form-control') }}
+          </div>
+        </div>
+
+        <div class="col-sm-12 form-group">
+          <label for="postalCode" class="col-sm-4 col-form-label">Storage kWh</label>
+          <div class="col-sm-8">
+            {{ form.batteryStorageCapacity(class_='form-control') }}
+          </div>
+        </div>
+
+        <div class="col-sm-12 form-group">
+          <div class="col-sm-2 pull-right">
+
+            <button type="submit" name="action" value="add" class="btn btn-primary mt-3">Add</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+  
+  <div class="appForm-small pull-right">
+      <div class="col-sm-4 pull-right">
+        <!-- <a href="{{ url_for('power_list') }}" class="btn btn-info mt-3" role="button" aria-pressed="true" {{disableSubmit}}> Skip </a> -->
+
+         <form action="/power-list" method="get">
+          <button type="submit" name="action" value="skip" class="btn btn-info mt-3" {{disableSubmit}}>
+            Skip
+          </button>
+        </form> 
+      </div>
+  </div>
+
+</div>
+
+{% endblock %}

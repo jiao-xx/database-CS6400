@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Alternakraft - {% block title %}{% endblock %}</title>
+
+  <!-- Bootstrap core CSS -->
+
+  <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="{{url_for('static', filename='css/ie10-viewport-bug-workaround.css')}}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{{url_for('static', filename='css/app.css')}}" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <!-- <script src="{{url_for('static', filename='js/ie-emulation-modes-warning.js')}}"></script> -->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand" href="{{ url_for('main') }}">Alternakraft | Team 022 (Summer 2023)</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container">
+
+    {% if show_report_breadcrumb %}
+    <ul class="breadcrumb">
+      <li><a href="{{ url_for('reports') }}">Reports</a></li>
+
+      <!-- <li>{{ pageTitle }}</li> -->
+
+      {% block pageTitleContent %}{% endblock %}
+      {% if isDrillDown %}
+      <li>{{ subPageTitle }}</li>
+      {% endif %}
+    </ul>
+    {% endif %}
+
+
+    <div class="starter-template">
+      {% block content %}{% endblock %}
+
+
+    </div>
+  </div><!-- /.container -->
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+  <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="{{url_for('static', filename='js/ie10-viewport-bug-workaround.js')}}"></script>
+
+  <!-- <script type="text/javascript">
+    alertify.set('notifier','position', 'top-center');
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+
+      let messageType = '{{messages[0][0]}}';
+      let message = '{{messages[0][1]}}';
+
+      if(messageType =='success-next-page')
+      {
+        alertify.success(message);
+      }
+
+  {% endif %}
+  {% endwith %}
+
+    
+  </script> -->
+
+  <script>
+    $(document).ready(function () {
+
+      function toggleHcMethods(selected_hc_types) {
+        if (selected_hc_types.includes('Air conditioner')) {
+          $("#eer").show();
+        }
+        else {
+          $("#eer").hide();
+        }
+
+        if (selected_hc_types.includes('Heater')) {
+          $("#heaterEnergySource").show();
+        }
+        else {
+          $("#heaterEnergySource").hide();
+        }
+
+        if (selected_hc_types.includes('Heat pump')) {
+          $("#seer").show();
+          $("#hspf").show();
+        }
+        else {
+          $("#seer").hide();
+          $("#hspf").hide();
+        }
+      }
+
+      var selected_hc_types = $('#heatingCoolingTypes option:selected')
+          .toArray().map(item => item.value);
+        
+          toggleHcMethods(selected_hc_types);
+        console.log('selected_hc_types: ' + selected_hc_types);
+
+      $("#waterHeaterDiv").hide();
+      $('#ahApplianceType').on('change', function () {
+
+        var applianceType = $(this).val();
+        console.log('ahApplianceType: onchange():' + applianceType);
+
+        if (applianceType == 'Water heater') {
+          $(this).val('Air handler');
+          $("#waterHeaterDiv").show();
+          $("#airHandlerDiv").hide();
+
+        }
+        else {
+          $("#waterHeaterDiv").hide();
+          $("#airHandlerDiv").show();
+        }
+
+      });
+
+
+      $('#whApplianceType').on('change', function () {
+
+        var applianceType = $(this).val();
+        console.log('whApplianceType: onchange():' + applianceType);
+
+        if (applianceType == 'Air handler') {
+          $(this).val('Water heater');
+          $("#waterHeaterDiv").hide();
+          $("#airHandlerDiv").show();
+        }
+        else {
+          $("#waterHeaterDiv").show();
+          $("#airHandlerDiv").hide();
+        }
+
+      });
+
+      $('#heatingCoolingTypes').on('change', function () {
+        var selected_hc_types = $('#heatingCoolingTypes option:selected')
+          .toArray().map(item => item.value);
+        //selected_hc_types.forEach(toggleHeatingCoolingMethod);
+        console.log('selected_hc_types: ' + selected_hc_types);
+        toggleHcMethods(selected_hc_types);
+
+        console.log('heatingCoolingTypes: onchange():' + selected_hc_types);
+      });
+    });
+
+    // heatingCoolingTypes
+    // eer
+    // heaterEnergySource
+    // seer
+    // hspf
+
+  </script>
+</body>
+
+</html>

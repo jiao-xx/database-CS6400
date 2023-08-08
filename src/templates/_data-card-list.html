@@ -1,0 +1,9 @@
+<div class="panel panel-default panel-card">
+  <div class="panel-body">
+    <p class="panel-header"> {{panelHeader}}</p>
+    {% for row in panelData %}
+      <li class="list-group-item panel-card-list">{{row[0]}} <span class="badge">{{row[1]}}</span></li>
+    {% endfor %}
+  </ul>
+  </div>
+</div>

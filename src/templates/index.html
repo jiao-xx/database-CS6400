@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+{% block title %}Alternakraft{% endblock %}
+
+{% block content %}
+<h1>Welcome to Alternakraft!</h1>
+<p class="lead">Please choose what you'd like to do:</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <a href="{{ url_for('household') }}" class="btn btn-lg btn-link">Enter my household info</a>
+    </div>
+    <div class="col-sm">
+      <a href="{{ url_for('reports') }}" class="btn btn-lg btn-link">View reports/query data</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
