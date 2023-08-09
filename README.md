@@ -1,5 +1,7 @@
 # cs6400-2023-02-Team22
 
+Contains all class materials
+
 create a file named `db.env` under the `src` directory and enter your database information as shown below:
 
 ```
